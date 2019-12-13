@@ -1,0 +1,176 @@
+
+    <div class="big-main" style="padding-top: 2%;">
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3"><span style="font-size: large; float: center;">Select Company/Sector:</span>&nbsp;</div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <select class="form-control" (change)="changeCompanyorSector($event.target.value);">
+                        <option value="company">company</option>
+                        <option value="sector">sector</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3"><span style="font-size: large; float: center;">Select Stock Exchange:</span>&nbsp;&nbsp;</div>
+            <div class="col-md-3">
+                <select class="form-control" id="exchange" (change)="changeBseOrNse($event.target.value);">
+                    <option value="bse">BSE</option>
+                    <option value="nse">NSE</option>
+                </select>
+            </div>
+        </div>
+        <div class="row" style="padding-top: 1%;">
+            <div class="col-md-3 col-md-offset-3"><span style="font-size:large; float: center;">Company/Sector Name:</span>&nbsp;&nbsp;</div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input [(ngModel)]="companyOrSector_name" type="text" class="form-control" name="" placeholder="Company/Sector name">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-folder-open">
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- second form -->
+        <div id="secondForm" style="display: none;">
+            <div class="row">
+                <div class="col-md-3 col-md-offset-3"><span style="font-size: large; float: center;">Select Company/Sector:</span>&nbsp;</div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select class="form-control" id="secondcompanysector" (change)="changeSecondCompanyorSector($event.target.value);">
+                            <option value="company">company</option>
+                            <option value="sector">sector</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3 col-md-offset-3"><span style="font-size: large; float: center;">Select Stock Exchange:</span>&nbsp;&nbsp;</div>
+                <div class="col-md-3">
+                    <select class="form-control" (change)="changeSecondBseOrNse($event.target.value);">
+                        <option value="bse">BSE</option>
+                        <option value="nse">NSE</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row" style="padding-top: 1%;">
+                <div class="col-md-3 col-md-offset-3"><span style="font-size:large; float: center;">Company/Sector Name:</span>&nbsp;&nbsp;</div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input [(ngModel)]="companyOrSector_second_name" type="text" class="form-control" name="" placeholder="Company/Sector name">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-folder-open">
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Second finished -->
+
+        <div class="row" >
+            <div class="col-md-3 col-md-offset-3"><span style="font-size:large; float: center;">From Peroid:</span></div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="datetime" class="form-control" [(ngModel)]="startTime" name="" id="startTime" placeholder="YYYY-mm-dd hh:mm:ss">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar">
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3"><span style="font-size:large; float: center;">To Peroid:</span>&nbsp;&nbsp;</div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="datetime" class="form-control" [(ngModel)]="endTime" name="" id="endTime" placeholder="YYYY-mm-dd hh:mm:ss">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar">
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3"><span style="font-size:large; float: center;">Specify Periodicity&nbsp;(days):</span>&nbsp;&nbsp;</div>
+            <div class="col-md-3">
+                
+                
+                <input type="range" class="custom-range" min="1" max="120" step="1" id="customRange3" [(ngModel)]="rangeValue" style="width: 100%;">
+                <div style="float: left;">
+                    last&nbsp;<span id="rangevalue" style="font-style: oblique; font-weight: 700;">{{rangeValue}}</span> days
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-md-offset-9">
+                <button id="addbutton" (click)="add()" type="button" class="btn btn-danger" style="width: 25%;">Add</button>
+                <button id="removebutton" (click)="remove()" type="button" class="btn btn-danger" style="width: 25%; display: none;">Remove</button>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 2%;">
+            <div class="col-md-3 col-md-offset-5">
+                <button (click)="getDatas()" type="button" class="btn btn-warning" style="width: 100%;">Generate Map</button>
+            </div>
+        </div>
+
+        
+        <div id="chartRow" class="row" style="display: none;">
+            <div class="col-md-8 col-md-offset-2" style="height: 400px;">
+              <div id="chart1">
+                    <fusioncharts
+                    width="700"
+                    height="400"
+                    [type]="firstChartType"
+                    [dataSource]="firstChart"
+                >
+                
+                </fusioncharts>
+              </div>
+              <div id="chart2">
+                <fusioncharts
+                    width="700"
+                    height="400"
+                    [type]="secondChartType"
+                    [dataSource]="secondChart"
+                >
+                </fusioncharts>
+              </div>
+              <div id="chart3">
+                <fusioncharts 
+                    width="700"
+                    height="400"
+                    [type]="mergedChartType"
+                    [dataSource]="mergedChart"
+                >
+                </fusioncharts>
+              </div>
+            </div>
+            <!-- <span>{{anyList.heroesUrl}}</span> -->
+            <div class="col-md-1" >
+                <p>
+                    average: {{average}}
+                </p>
+                <div id="mergeButton" style="display: none;">
+                    <button (click)="mergeChartsToOneChart()">merge as single chart </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
